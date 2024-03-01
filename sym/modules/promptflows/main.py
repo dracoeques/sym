@@ -380,7 +380,10 @@ def duplicate_prompt_flow(session, id_prompt_flow):
     edges = pf.edges
 
     #get existing nodes / edges
-    idstr2nodes = {}
+    id2nodes = {n.id:n for n in pf.nodes}
+    idstr2edges = {e.id_str:e for e in pf.edges}
+
+    new_idstr2nodes = {}
 
     #create a new prompt flow object with the existing data 
     #CHANGE THE NAME
@@ -392,10 +395,10 @@ def duplicate_prompt_flow(session, id_prompt_flow):
 
     #create new nodes and edges for the new prompt flow object
     #add our nodes
-    for node_config in nodes:
-        id_str = node_config["id"]
-        node_type = node_config["type"]
-        node_payload = node_config["node_payload"]
+    for node in nodes:
+        id_str = node.id_str
+        node_type = node.node_type
+        node_payload = node.payload
 
         node_record = build_node_record(
             id_str=id_str,
@@ -403,28 +406,23 @@ def duplicate_prompt_flow(session, id_prompt_flow):
             node_payload=node_payload,
             id_prompt_flow=pf.id,
         )
-        session.add(node_record)
-        idstr2nodes[id_str] = node_record
+        session.commit()
+        id2nodes[node.id] = node_record
     
     session.commit()
 
     #add our edges
     for edge in edges:
         #print(edge)
-        id_str = edge["id"]
-        source = edge["source"]
-        target = edge["target"]
-        source_handle = edge["sourceHandle"]
-        edge_payload = {
-            "source_handle":source_handle,
-        }
-        node_source = idstr2nodes[source].id
-        node_target = idstr2nodes[target].id
+        id_str = edge.id_str
+        start_node_id = id2nodes[edge.start_node_id].id
+        end_node_id = id2nodes[edge.end_node_id].id
+        edge_payload = edge.payload
         edge_record = build_edge_record(
             id_str=id_str,
             id_prompt_flow=pf.id,
-            start_node_id=node_source,
-            end_node_id=node_target,
+            start_node_id=start_node_id,
+            end_node_id=end_node_id,
             edge_payload=edge_payload,
         )
         session.add(edge_record)
