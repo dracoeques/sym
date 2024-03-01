@@ -1,0 +1,157 @@
+{
+  "network": {
+    "edges": [
+      {
+        "id": "reactflow__edge-node_1694631969099next-node_1694631975539",
+        "source": "node_1694631969099",
+        "target": "node_1694631975539",
+        "sourceHandle": "next",
+        "targetHandle": null
+      },
+      {
+        "id": "reactflow__edge-node_1694631975539-node_1694632006219",
+        "source": "node_1694631975539",
+        "target": "node_1694632006219",
+        "sourceHandle": null,
+        "targetHandle": null
+      },
+      {
+        "id": "reactflow__edge-node_1694632006219next-node_1694631994069",
+        "source": "node_1694632006219",
+        "target": "node_1694631994069",
+        "sourceHandle": "next",
+        "targetHandle": null
+      },
+      {
+        "id": "reactflow__edge-node_1694631994069next-node_1694632080324",
+        "source": "node_1694631994069",
+        "target": "node_1694632080324",
+        "sourceHandle": "next",
+        "targetHandle": null
+      }
+    ],
+    "nodes": [
+      {
+        "id": "node_1694631969099",
+        "data": {
+          "label": "start"
+        },
+        "type": "start",
+        "width": 54,
+        "height": 40,
+        "dragging": false,
+        "position": {
+          "x": 319.21006944444446,
+          "y": 114.4444444444444
+        },
+        "selected": false,
+        "positionAbsolute": {
+          "x": 319.21006944444446,
+          "y": 114.4444444444444
+        }
+      },
+      {
+        "id": "node_1694631975539",
+        "data": {
+          "label": "text_input"
+        },
+        "type": "text_input",
+        "width": 150,
+        "height": 40,
+        "dragging": false,
+        "position": {
+          "x": 262.5434027777778,
+          "y": 206.66666666666663
+        },
+        "selected": false,
+        "positionAbsolute": {
+          "x": 262.5434027777778,
+          "y": 206.66666666666663
+        }
+      },
+      {
+        "id": "node_1694631994069",
+        "data": {
+          "label": "prompt"
+        },
+        "type": "prompt",
+        "width": 68,
+        "height": 40,
+        "dragging": false,
+        "position": {
+          "x": 301.43229166666663,
+          "y": 370.0000000000001
+        },
+        "selected": true,
+        "positionAbsolute": {
+          "x": 301.43229166666663,
+          "y": 370.0000000000001
+        }
+      },
+      {
+        "id": "node_1694632006219",
+        "data": {
+          "label": "storage"
+        },
+        "type": "storage",
+        "width": 71,
+        "height": 40,
+        "dragging": false,
+        "position": {
+          "x": 301.43229166666674,
+          "y": 273.3333333333333
+        },
+        "selected": false,
+        "positionAbsolute": {
+          "x": 301.43229166666674,
+          "y": 273.3333333333333
+        }
+      },
+      {
+        "id": "node_1694632080324",
+        "data": {
+          "label": "finish"
+        },
+        "type": "finish",
+        "width": 60,
+        "height": 40,
+        "dragging": false,
+        "position": {
+          "x": 303.6545138888889,
+          "y": 471.11111111111114
+        },
+        "selected": false,
+        "positionAbsolute": {
+          "x": 303.6545138888889,
+          "y": 471.11111111111114
+        }
+      }
+    ],
+    "viewport": {
+      "x": 0,
+      "y": 0,
+      "zoom": 0.9
+    }
+  },
+  "node_data": {
+    "node_1694631975539": {
+      "id": "node_1694631975539",
+      "hint": "",
+      "question": "Hello traveler, how may I be of assistance?"
+    },
+    "node_1694631994069": {
+      "id": "node_1694631994069",
+      "model": "gpt-3.5-turbo",
+      "prompt": "Come up with possible solutions for {task}",
+      "system": "You are 1000 year old zen monk who gained immortality via enlightenment and magic, you speak only in riddles which attempt to get the asker to consider different alternatives and ways of thinking. "
+    },
+    "node_1694632006219": {
+      "id": "node_1694632006219",
+      "variable_name": "task"
+    },
+    "node_1694632080324": {
+      "id": "node_1694632080324",
+      "outro_message": "{text}"
+    }
+  }
+}

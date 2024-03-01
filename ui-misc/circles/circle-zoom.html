@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Spheres within a Sphere</title>
+  <style>
+    /* Style the SVG container */
+    .svg-container {
+      width: 300px;
+      height: 300px;
+    }
+
+    /* Style for the outer sphere */
+    .outer-sphere {
+      fill: rgba(0, 0, 255, 0.3);
+      stroke: blue;
+      stroke-width: 2;
+    }
+
+    /* Style for the inner spheres */
+    .inner-sphere {
+      fill: rgba(255, 0, 0, 0.5);
+      stroke: red;
+      stroke-width: 2;
+    }
+  </style>
+</head>
+<body>
+  <div class="svg-container">
+    <!-- Create the SVG element -->
+    <svg id="main-svg" width="300" height="300" viewBox="0 0 300 300">
+      <!-- Draw the outer sphere -->
+      <circle class="outer-sphere" cx="150" cy="150" r="100" />
+
+      <!-- Draw 7 inner spheres -->
+      <!-- Each sphere has an id and an associated text label -->
+      <g id="sphere1" class="inner-sphere-group">
+        <circle class="inner-sphere" cx="150" cy="50" r="25" />
+        <text x="140" y="55">A</text>
+      </g>
+      <g id="sphere2" class="inner-sphere-group">
+        <circle class="inner-sphere" cx="77.94" cy="77.94" r="25" />
+        <text x="70" y="82">B</text>
+      </g>
+      <g id="sphere3" class="inner-sphere-group">
+        <circle class="inner-sphere" cx="50" cy="150" r="25" />
+        <text x="40" y="155">C</text>
+      </g>
+      <g id="sphere4" class="inner-sphere-group">
+        <circle class="inner-sphere" cx="77.94" cy="222.06" r="25" />
+        <text x="70" y="227">D</text>
+      </g>
+      <g id="sphere5" class="inner-sphere-group">
+        <circle class="inner-sphere" cx="150" cy="250" r="25" />
+        <text x="140" y="255">E</text>
+      </g>
+      <g id="sphere6" class="inner-sphere-group">
+        <circle class="inner-sphere" cx="222.06" cy="222.06" r="25" />
+        <text x="215" y="227">F</text>
+      </g>
+      <g id="sphere7" class="inner-sphere-group">
+        <circle class="inner-sphere" cx="250" cy="150" r="25" />
+        <text x="240" y="155">G</text>
+      </g>
+    </svg>
+  </div>
+
+  <script>
+    // Function to handle clicks on inner spheres
+    function zoomIn(evt) {
+      const svg = document.getElementById('main-svg');
+      const clickedSphere = evt.currentTarget;
+      const circleElement = clickedSphere.querySelector('circle');
+      const cx = parseFloat(circleElement.getAttribute('cx'));
+      const cy = parseFloat(circleElement.getAttribute('cy'));
+      const r = parseFloat(circleElement.getAttribute('r'));
+
+      const viewBoxX = cx - r;
+      const viewBoxY = cy - r;
+      const viewBoxWidth = r * 2;
+      const viewBoxHeight = r * 2;
+
+      svg.setAttribute('viewBox', `${viewBoxX} ${viewBoxY} ${viewBoxWidth} ${viewBoxHeight}`);
+    }
+
+    // Attach the click handler to each inner sphere
+    const innerSphereGroups = document.querySelectorAll('.inner-sphere-group');
+    innerSphereGroups.forEach(group => group.addEventListener('click', zoomIn));
+  </script>
+</body>
+</html>

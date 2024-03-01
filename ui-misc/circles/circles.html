@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Spheres within a Sphere</title>
+  <style>
+    /* Style the SVG container */
+    .svg-container {
+      width: 300px;
+      height: 300px;
+    }
+
+    /* Style for the outer sphere */
+    .outer-sphere {
+      fill: rgba(0, 0, 255, 0.3);
+      stroke: blue;
+      stroke-width: 2;
+    }
+
+    /* Style for the inner spheres */
+    .inner-sphere {
+      fill: rgba(255, 0, 0, 0.5);
+      stroke: red;
+      stroke-width: 2;
+    }
+  </style>
+</head>
+<body>
+  <div class="svg-container">
+    <!-- Create the SVG element -->
+    <svg width="300" height="300">
+      <!-- Draw the outer sphere -->
+      <circle class="outer-sphere" cx="150" cy="150" r="100" />
+
+      <!-- Draw 7 inner spheres -->
+      <circle class="inner-sphere" cx="150" cy="50" r="25" />
+      <circle class="inner-sphere" cx="77.94" cy="77.94" r="25" />
+      <circle class="inner-sphere" cx="50" cy="150" r="25" />
+      <circle class="inner-sphere" cx="77.94" cy="222.06" r="25" />
+      <circle class="inner-sphere" cx="150" cy="250" r="25" />
+      <circle class="inner-sphere" cx="222.06" cy="222.06" r="25" />
+      <circle class="inner-sphere" cx="250" cy="150" r="25" />
+    </svg>
+  </div>
+</body>
+</html>

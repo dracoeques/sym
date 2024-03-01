@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Complex Spheres</title>
+  <style>
+    .svg-container {
+      width: 800px;
+      height: 800px;
+      position: relative;
+    }
+
+    .outer-sphere {
+      fill: rgba(0, 0, 255, 0.3);
+      stroke: blue;
+      stroke-width: 2;
+    }
+
+    .inner-sphere {
+      fill: rgba(255, 0, 0, 0.5);
+      stroke: red;
+      stroke-width: 2;
+      cursor: pointer;
+    }
+
+   
+
+    .inner-sphere-small {
+      fill: rgba(255, 0, 0, 0.5);
+      stroke: red;
+      stroke-width: 2;
+      cursor: pointer;
+    }
+
+    .inner-text {
+        cursor: pointer;
+        font-size: 10px;
+    }
+
+    .inner-text-small {
+        cursor: pointer;
+        font-size: 6px;
+    }
+
+  
+
+    .centered-input {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); /* Centering trick */
+        z-index: 2; /* Ensure it floats above the SVG */
+    }
+
+  </style>
+</head>
+<body>
+  <div class="svg-container">
+    <!-- Input centered over the SVG -->
+    <input id="center-input" type="text" class="centered-input" placeholder="Enter text here">
+
+    <svg id="main-svg" width="800" height="800" viewBox="0 0 800 800">
+      <circle class="outer-sphere" cx="400" cy="400" r="250" />
+    </svg>
+  </div>
+
+  <script>
+
+    const categories = [
+  {
+    "name": "Natural Language Processing",
+    "subcategories": [
+      {
+        "name": "Text Generation"
+      },
+      {
+        "name": "Sentiment Analysis"
+      },
+      {
+        "name": "Question Answering"
+      },
+      {
+        "name": "Machine Translation"
+      },
+      {
+        "name": "Chatbots"
+      },
+      {
+        "name": "Text Summarization"
+      },
+      {
+        "name": "Named Entity Recognition"
+      }
+    ]
+  },
+  {
+    "name": "Computer Vision",
+    "subcategories": [
+      {
+        "name": "Image Generation"
+      },
+      {
+        "name": "Object Detection"
+      },
+      {
+        "name": "Image Segmentation"
+      },
+      {
+        "name": "Facial Recognition"
+      },
+      {
+        "name": "Style Transfer"
+      },
+      {
+        "name": "Image Captioning"
+      },
+      {
+        "name": "Optical Character Recognition"
+      }
+    ]
+  },
+  {
+    "name": "Audio Processing",
+    "subcategories": [
+      {
+        "name": "Speech Recognition"
+      },
+      {
+        "name": "Music Generation"
+      },
+      {
+        "name": "Speech Synthesis"
+      },
+      {
+        "name": "Sound Classification"
+      },
+      {
+        "name": "Audio Segmentation"
+      },
+      {
+        "name": "Voice Cloning"
+      },
+      {
+        "name": "Audio Enhancement"
+      }
+    ]
+  },
+  {
+    "name": "Healthcare",
+    "subcategories": [
+      {
+        "name": "Drug Discovery"
+      },
+      {
+        "name": "Medical Imaging"
+      },
+      {
+        "name": "Disease Prediction"
+      },
+      {
+        "name": "Health Monitoring"
+      },
+      {
+        "name": "Genomics"
+      },
+      {
+        "name": "Clinical Decision Support"
+      },
+      {
+        "name": "Personalized Medicine"
+      }
+    ]
+  },
+  {
+    "name": "Robotics",
+    "subcategories": [
+      {
+        "name": "Motion Planning"
+      },
+      {
+        "name": "Navigation"
+      },
+      {
+        "name": "Object Manipulation"
+      },
+      {
+        "name": "Simulated Environments"
+      },
+      {
+        "name": "Human-Robot Interaction"
+      },
+      {
+        "name": "Swarm Robotics"
+      },
+      {
+        "name": "Autonomous Vehicles"
+      }
+    ]
+  },
+  {
+    "name": "Finance",
+    "subcategories": [
+      {
+        "name": "Algorithmic Trading"
+      },
+      {
+        "name": "Fraud Detection"
+      },
+      {
+        "name": "Risk Management"
+      },
+      {
+        "name": "Credit Scoring"
+      },
+      {
+        "name": "Customer Segmentation"
+      },
+      {
+        "name": "Portfolio Optimization"
+      },
+      {
+        "name": "Sentiment Analysis"
+      }
+    ]
+  },
+  {
+    "name": "Entertainment",
+    "subcategories": [
+      {
+        "name": "Game Development"
+      },
+      {
+        "name": "Virtual Reality"
+      },
+      {
+        "name": "Content Recommendation"
+      },
+      {
+        "name": "Film Script Writing"
+      },
+      {
+        "name": "Art Creation"
+      },
+      {
+        "name": "Music Composition"
+      },
+      {
+        "name": "Animation"
+      }
+    ]
+  }
+];
+
+
+    let isZoomed = false; // Flag to track the zoom state
+
+    // Function to handle clicks on inner spheres
+    function zoomIn(evt) {
+        const svg = document.getElementById('main-svg');
+        const circleElement = evt.target;
+        const cx = parseFloat(circleElement.getAttribute('dcx'));
+        const cy = parseFloat(circleElement.getAttribute('dcy'));
+        const r = parseFloat(circleElement.getAttribute('dr'));
+
+        let startViewBox, endViewBox;
+
+        const zoomScale = 3.5;
+        const offsetScale = 2;
+        const xOffset = 100;
+        const yOffset = 100;
+
+        if (!isZoomed) {
+            startViewBox = { x: 0, y: 0, width: 800, height: 800 };
+            endViewBox = { x: cx - r*offsetScale, y: cy - r*offsetScale, width: r * zoomScale, height: r * zoomScale };
+
+            
+            let element = document.querySelector('#center-input'); // Select the element by its ID
+            element.setAttribute('hidden', true); // This will hide the element
+        } else {
+            startViewBox = { x: cx - r*offsetScale, y: cy - r*offsetScale, width: r * zoomScale, height: r * zoomScale };
+            endViewBox = { x: 0, y: 0, width: 800, height: 800 };
+
+           
+        }
+        
+        const duration = 300; // Animation duration in milliseconds
+        const stepCount = 30; // Number of animation steps
+        let currentStep = 0;
+
+        function easeInOutCubic(t) {
+            if (t < 0.5) {
+                return 4 * t * t * t;
+            } else {
+                return 1 - Math.pow(-2 * t + 2, 3) / 2;
+            }
+        }
+
+        function linearZoom(t) {
+            return t
+        }
+
+        // Animate the viewBox values
+        const animateViewBox = () => {
+            currentStep++;
+            let progress = currentStep / stepCount;
+            progress = easeInOutCubic(progress);
+            const newViewBox = {
+                x: startViewBox.x + (endViewBox.x - startViewBox.x) * progress,
+                y: startViewBox.y + (endViewBox.y - startViewBox.y) * progress,
+                width: startViewBox.width + (endViewBox.width - startViewBox.width) * progress,
+                height: startViewBox.height + (endViewBox.height - startViewBox.height) * progress,
+            };
+            svg.setAttribute('viewBox', `${newViewBox.x} ${newViewBox.y} ${newViewBox.width} ${newViewBox.height}`);
+            
+            if (currentStep < stepCount) {
+                requestAnimationFrame(animateViewBox);
+            } else {
+                isZoomed = !isZoomed;
+                if (!isZoomed){
+                  let element = document.querySelector('#center-input'); // Select the element by its ID
+                  element.removeAttribute('hidden'); // This will show the element
+
+                }
+            }
+        };
+
+        // Start the animation
+        animateViewBox();
+    }
+
+    //click an inner circle
+    function clickInner(evt) {
+        if (!isZoomed) {
+            //do nothing
+        } else {
+            const circleElement = evt.target;
+            console.log("clickInner", circleElement);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const svg = document.getElementById('main-svg');
+      const centerX = 400, centerY = 400, largeRadius = 250, smallRadius = 50;
+      let circleCounter = 0;
+
+      for (let i = 0; i < 7; i++) {
+
+        const category = categories[i]
+
+        const angle1 = (2 * Math.PI / 7) * i;
+        const largeX = centerX + largeRadius * Math.cos(angle1);
+        const largeY = centerY + largeRadius * Math.sin(angle1);
+        const largeCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        largeCircle.setAttribute('cx', largeX);
+        largeCircle.setAttribute('cy', largeY);
+        largeCircle.setAttribute('r', smallRadius);
+        largeCircle.setAttribute('class', 'inner-sphere');
+        largeCircle.setAttribute('dcx', largeX);
+        largeCircle.setAttribute('dcy', largeY);
+        largeCircle.setAttribute('dr', smallRadius);
+        svg.appendChild(largeCircle);
+        
+        const largeLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        largeLabel.setAttribute('x', largeX);
+        largeLabel.setAttribute('y', largeY);
+        largeLabel.setAttribute('text-anchor', 'middle');
+        largeLabel.setAttribute('dy', '.3em');
+        largeLabel.textContent =  category.name; //`L${i + 1}`;
+        largeLabel.setAttribute('class', 'inner-text');
+        largeLabel.setAttribute('dcx', largeX);
+        largeLabel.setAttribute('dcy', largeY);
+        largeLabel.setAttribute('dr', smallRadius);
+        svg.appendChild(largeLabel);
+
+        for (let j = 0; j < 7; j++) {
+          const subcategory = categories[i].subcategories[j];
+
+          circleCounter++;
+          const angle2 = (2 * Math.PI / 7) * j;
+          const x = largeX + smallRadius * Math.cos(angle2);
+          const y = largeY + smallRadius * Math.sin(angle2);
+          const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+          circle.setAttribute('cx', x);
+          circle.setAttribute('cy', y);
+          circle.setAttribute('r', smallRadius / 3);
+          circle.setAttribute('dcx', x);
+          circle.setAttribute('dcy', y);
+          circle.setAttribute('dr', smallRadius);
+          circle.setAttribute('class', 'inner-sphere-small');
+          svg.appendChild(circle);
+
+          const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+          label.setAttribute('x', x);
+          label.setAttribute('y', y);
+          label.setAttribute('text-anchor', 'middle');
+          label.setAttribute('dy', '.3em');
+          label.textContent = subcategory.name//`S${circleCounter}`;
+          label.setAttribute('dcx', x);
+          label.setAttribute('dcy', y);
+          label.setAttribute('dr', smallRadius );
+          //label.setAttribute('class', 'inner-text');
+          label.setAttribute('class', 'inner-text-small');
+          svg.appendChild(label);
+        }
+      }
+
+      const innerSpheres = document.querySelectorAll('.inner-sphere');
+      innerSpheres.forEach(circle => circle.addEventListener('click', zoomIn));
+      
+      const innerTexts = document.querySelectorAll('.inner-text');
+      innerTexts.forEach(text => text.addEventListener('click', zoomIn));
+
+
+      const innerSpheresSmall = document.querySelectorAll('.inner-sphere-small');
+      innerSpheresSmall.forEach(circle => {
+        circle.addEventListener('click', clickInner)
+        circle.dataset.originalRadius = circle.getAttribute('r');
+         // Attach hover-in (mouseover) and hover-out (mouseout) event listeners
+         circle.addEventListener('mouseover', function() {
+            const originalRadius = parseFloat(circle.dataset.originalRadius);
+            circle.setAttribute('r', originalRadius * 1.2); // Increase the radius by 20%
+        });
+
+        circle.addEventListener('mouseout', function() {
+            circle.setAttribute('r', circle.dataset.originalRadius); // Reset the radius
+        });
+      });
+      
+      const innerTextsSmall = document.querySelectorAll('.inner-text-small');
+      innerTextsSmall.forEach(text => text.addEventListener('click', clickInner));
+
+
+    });
+  </script>
+</body>
+</html>

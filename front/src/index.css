@@ -1,0 +1,300 @@
+
+:root {
+  --gold: #ffb338;
+  /* --gold: #f8c837; */
+  --light-shadow: #77571d;
+  --dark-shadow: #3e2904;
+
+  --platinum: #969696;
+  --platinum-light: #e3e3e3;
+  --platinum-dark: #767676;
+}
+
+.goldwrapper > div {
+  background-clip: text;  
+  -webkit-background-clip: text;
+  color: #363833;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  font-size: clamp( 3em, 18vw, 15rem);
+  grid-area: overlap;
+  letter-spacing: 1px;
+  -webkit-text-stroke: 4px transparent;
+}
+
+div.bg {
+  background-image: repeating-linear-gradient( 0deg, 
+    var(--gold) 0% , 
+    var(--dark-shadow) 5%,
+    var(--gold) 60%);
+  /* color: transparent; */
+  filter: drop-shadow(5px 15px 15px black);
+  transform: scaleY(1.05);
+  transform-origin: top;
+}
+div.fg{
+  background-image: repeating-linear-gradient( 45deg,  
+    var(--gold) 0% , 
+    var(--light-shadow) 23%, 
+    var(--gold) 31%);
+  color: #1e2127;
+  transform: scale(1);
+}
+
+
+div.pbg {
+  background-image: repeating-linear-gradient( 0deg, 
+    var(--platinum) 0% , 
+    var(--platinum-dark) 5%,
+    var(--platinum) 60%);
+  /* color: transparent; */
+  filter: drop-shadow(5px 15px 15px black);
+  transform: scaleY(1.05);
+  transform-origin: top;
+}
+div.pfg{
+  background-image: repeating-linear-gradient( 45deg,  
+    var(--platinum) 0% , 
+    var(--platinum-light) 23%, 
+    var(--platinum) 31%);
+  color: #1e2127;
+  transform: scale(1);
+}
+
+
+.chat-input {
+  border-radius: 4px;box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+
+.chat-input:focus {
+  outline: none !important;
+}
+
+#inputForm34:focus {
+  outline-width: 0;
+  outline: 1px #ffffff;
+}
+
+#inputForm34:active {
+  border: none;
+}
+
+:focus { outline: none; }
+textarea:focus, input:focus{ border: none; }
+textarea:focus, input:focus{
+  outline: none;
+}
+
+.input-group:focus {
+  outline: none;
+}
+
+.shine {
+  background: radial-gradient(circle at center, 
+    rgb(0, 0, 0), rgb(203, 203, 75), rgb(0, 0, 0)),100% ;
+}
+
+.message-row {
+  margin-bottom: 20px;
+  /* background-color: rgb(66, 64, 63); */
+}
+
+/* what are some of the best dive sites in the world?
+You are a bumbling fool, use a lot of complex words incorrectly */
+
+.nomargin {
+  margin: 0 !important;
+}
+
+.nopad {
+  padding: 0 !important;
+}
+
+.cs-message-list {
+  background-color: #343541;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #cbcbcb;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+
+/* PROMPT DECK UI */
+
+/* * {
+  box-sizing: border-box;
+} */
+
+/* body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+} */
+
+.deck-body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.deck-container {
+  display: flex;
+  height: 100%;
+  background-color: #1e2127;
+}
+
+.deck-left-column {
+  width: 400px; /* adjust this value as you wish */
+  
+  padding: 20px;
+}
+
+.deck-content-area {
+  flex-grow: 1;
+  overflow-x: auto;
+  display: flex;
+  height: 100%;
+}
+
+.deck-column {
+  min-width: 500px; /* adjust this value as you wish */
+  height: 100%;
+  
+  border-left: 4px solid #ccc;
+  
+  
+}
+
+/* 
+  Flower css
+*/
+
+.main-svg {
+  background-color: #57375D;
+}
+
+.svg-container {
+  width: 800px;
+  height: 800px;
+  position: relative;
+  background-color: #57375D;
+}
+
+.outer-sphere {
+  fill: rgb(123, 61, 134);
+  stroke: rgb(168, 168, 169);
+  stroke-width: 2;
+}
+
+.inner-sphere {
+  fill: rgb(255, 155, 130);
+  stroke: rgb(255, 200, 200);
+  stroke-width: 1;
+  cursor: pointer;
+}
+
+
+.inner-sphere-small {
+  fill: rgb(255, 63, 164);
+  stroke: rgb(255, 200, 200);
+  stroke-width: 2;
+  cursor: pointer;
+}
+
+.inner-text {
+    cursor: pointer;
+    font-size: 10px;
+    
+}
+
+.inner-text-small {
+    cursor: pointer;
+    font-size: 6px;
+    color: black;
+    stroke: rgb(255, 200, 200);
+    stroke-width: 0.5;
+}
+
+.centered-input {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centering trick */
+    z-index: 2; /* Ensure it floats above the SVG */
+    width: 200px;
+}
+
+/* 
+  PROMPT CHAT
+ */
+
+ .pad40 {
+    padding: 40px;
+ }
+
+ .geologica {
+  font-family: 'Geologica', sans-serif;
+  font-size: 16px;                     
+ }
+
+ .container-textarea {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* take full viewport height */
+  position: relative;
+}
+
+.dynamic-textarea {
+  flex-grow: 1; /* allows the textarea to grow and take up available space */
+  resize: none; /* disables manual resizing */
+  overflow-y: auto; /* allows vertical scrolling if the content grows too large */
+  margin-bottom: 0; /* remove any margin at the bottom */
+}
+
+.bottom-button {
+  position: absolute;
+  bottom: 30px;
+  right: 28px;
+}
+
+.media-item {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.media-image {
+  width: 150px;
+  height: 100px;
+  margin-right: 15px;
+}
+
+.media-content h3 {
+  margin: 0 0 10px 0;
+}
+
+.media-actions button {
+  margin-right: 10px;
+}
+
+.rdw-editor-main {
+  padding:10px;
+}

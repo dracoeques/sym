@@ -1,0 +1,89 @@
+<html>
+
+<body>
+    <form accept-charset="UTF-8" action="https://bm246.infusionsoft.com/app/form/process/f0a558804516b1b1bb9f85ce390a704f" class="infusion-form" id="inf_form_f0a558804516b1b1bb9f85ce390a704f" method="POST">
+        <input name="inf_form_xid" type="hidden" value="f0a558804516b1b1bb9f85ce390a704f" />
+        <input name="inf_form_name" type="hidden" value="Web Form submitted" />
+        <input name="infusionsoft_version" type="hidden" value="1.70.0.629449" />
+        <div class="infusion-field">
+            <input id="inf_field_Email" name="inf_field_Email" placeholder="Email *" type="text" />
+        </div>
+        <div>
+            <div>&nbsp;</div>
+        </div>
+        <div class="infusion-submit">
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+
+    <script type="text/javascript" src="https://bm246.infusionsoft.app/app/webTracking/getTrackingCode"></script>
+    <script type="text/javascript" src="https://bm246.infusionsoft.com/app/timezone/timezoneInputJs?xid=f0a558804516b1b1bb9f85ce390a704f"></script>
+    <script type="text/javascript" src="https://bm246.infusionsoft.com/js/jquery/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="https://bm246.infusionsoft.app/app/webform/overwriteRefererJs"></script>
+
+    <!-- Loading spinner, hidden initially -->
+    <div id="loadingSpinner" style="display:none;">
+        Loading...
+        <!-- You can replace this with a graphical spinner -->
+    </div>
+
+</body>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('inf_form_f0a558804516b1b1bb9f85ce390a704f');
+    const loadingSpinner = document.getElementById('loadingSpinner');
+
+    form.onsubmit = async function(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        const email = document.getElementById('inf_field_Email').value;
+        const data = { 
+            email: email,
+            "q1":"Option 1: Seek to understand both perspectives before taking any action.",
+            "q2":"Option 1: Creating a safe and empathetic space for clients to express their feelings.",
+            "q3":"Option 1: Listen intently and validate the other person's feelings.",
+            "q4":"Option 1: As a guide who helps clients discover their own solutions to relationship challenges.",
+            "q5":"Option 1: Explore various emotional perspectives and the underlying feelings involved.",
+            "q6":"Option 1: Emotional connection and mutual understanding.",
+            "q7":"Option 1: Reflect on the feedback emotionally and consider how it affects the client-coach relationship.",
+        };
+
+        // Show the loading spinner
+        loadingSpinner.style.display = 'block';
+        form.style.display = "none";
+
+        try {
+            // Perform the API POST request
+            const response = await fetch('http://localhost:8000/love_coach_type', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (response.ok) {
+                // Handle the response here
+                const responseData = await response.json();
+                console.log(responseData);
+
+                // Submit the form or redirect as needed
+                form.submit(); // Uncomment this if you still need to submit the form
+            } else {
+                // Handle errors
+                console.error('API request failed:', response.status, response.statusText);
+            }
+        } catch (error) {
+            console.error('Error during the API request:', error);
+        } finally {
+            // Hide the loading spinner
+            loadingSpinner.style.display = 'none';
+        }
+    };
+});
+
+</script>
+
+</html>
+

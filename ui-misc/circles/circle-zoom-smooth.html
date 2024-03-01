@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Spheres within a Sphere</title>
+  <style>
+    /* Style the SVG container */
+    .svg-container {
+      width: 300px;
+      height: 300px;
+    }
+
+    /* Style for the outer sphere */
+    .outer-sphere {
+      fill: rgba(0, 0, 255, 0.3);
+      stroke: blue;
+      stroke-width: 2;
+    }
+
+    /* Style for the inner spheres */
+    .inner-sphere {
+      fill: rgba(255, 0, 0, 0.5);
+      stroke: red;
+      stroke-width: 2;
+    }
+  </style>
+</head>
+<body>
+  <div class="svg-container">
+    <!-- Create the SVG element -->
+    <svg id="main-svg" width="300" height="300" viewBox="0 0 300 300">
+      <!-- Draw the outer sphere -->
+      <circle class="outer-sphere" cx="150" cy="150" r="100" />
+
+      <!-- Draw 7 inner spheres -->
+      <!-- Each sphere has an id and an associated text label -->
+      <g id="sphere1" class="inner-sphere-group">
+        <circle class="inner-sphere" cx="150" cy="50" r="25" />
+        <text x="140" y="55">A</text>
+      </g>
+      <g id="sphere2" class="inner-sphere-group">
+        <circle class="inner-sphere" cx="77.94" cy="77.94" r="25" />
+        <text x="70" y="82">B</text>
+      </g>
+      <!-- (add the rest of the spheres and labels here) -->
+    </svg>
+  </div>
+
+  <script>
+    let isZoomed = false; // Flag to track the zoom state
+
+    // Function to handle clicks on inner spheres
+    function zoomIn(evt) {
+      const svg = document.getElementById('main-svg');
+      const clickedSphere = evt.currentTarget;
+      const circleElement = clickedSphere.querySelector('circle');
+      const cx = parseFloat(circleElement.getAttribute('cx'));
+      const cy = parseFloat(circleElement.getAttribute('cy'));
+      const r = parseFloat(circleElement.getAttribute('r'));
+
+      let startViewBox, endViewBox;
+      
+      if (!isZoomed) {
+        startViewBox = { x: 0, y: 0, width: 300, height: 300 };
+        endViewBox = { x: cx - r, y: cy - r, width: r * 2, height: r * 2 };
+      } else {
+        startViewBox = { x: cx - r, y: cy - r, width: r * 2, height: r * 2 };
+        endViewBox = { x: 0, y: 0, width: 300, height: 300 };
+      }
+      
+      const duration = 500; // Animation duration in milliseconds
+      const stepCount = 30; // Number of animation steps
+      let currentStep = 0;
+
+      // Animate the viewBox values
+      const animateViewBox = () => {
+        currentStep++;
+        const progress = currentStep / stepCount;
+        const newViewBox = {
+          x: startViewBox.x + (endViewBox.x - startViewBox.x) * progress,
+          y: startViewBox.y + (endViewBox.y - startViewBox.y) * progress,
+          width: startViewBox.width + (endViewBox.width - startViewBox.width) * progress,
+          height: startViewBox.height + (endViewBox.height - startViewBox.height) * progress,
+        };
+        svg.setAttribute('viewBox', `${newViewBox.x} ${newViewBox.y} ${newViewBox.width} ${newViewBox.height}`);
+        
+        if (currentStep < stepCount) {
+          requestAnimationFrame(animateViewBox);
+        } else {
+          isZoomed = !isZoomed;
+        }
+      };
+
+      // Start the animation
+      animateViewBox();
+    }
+
+    // Attach the click handler to each inner sphere
+    const innerSphereGroups = document.querySelectorAll('.inner-sphere-group');
+    innerSphereGroups.forEach(group => group.addEventListener('click', zoomIn));
+  </script>
+</body>
+</html>

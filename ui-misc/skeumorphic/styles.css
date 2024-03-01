@@ -1,0 +1,88 @@
+/* styles.css (continued) */
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom, #353739, #1a1c1f); /* Added gradient */
+    color: white;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 50px;
+}
+
+.left, .center, .right {
+    flex: 1;
+    padding: 20px;
+}
+
+h1, h2, h3 {
+    margin-top: 0;
+}
+
+.card-info {
+    margin-top: 30px;
+}
+
+.card {
+    display: flex;
+    justify-content: space-between;
+    background-color: black;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.visa-logo {
+    font-weight: bold;
+}
+
+.card-number {
+    font-size: 1.2em;
+}
+
+.expiry-cvv span {
+    margin-right: 10px;
+}
+
+button {
+    background: linear-gradient(to top, #353739, #1a1c1f); /* Added gradient */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: linear-gradient(to bottom, #353739, #1a1c1f); /* Invert gradient on hover */
+}
+
+.device {
+    width: 80px;
+    height: 150px;
+    background-color: #333;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.pin-code {
+    margin-top: 20px;
+}
+
+.input-pins {
+    font-size: 1.5em;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.numbers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+/* Add more styling as per the design's requirements */

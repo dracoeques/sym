@@ -1,0 +1,7 @@
+
+
+bg-primary {
+  --bs-bg-opacity: 1;
+  background-color: #353739 !important;
+  background: linear-gradient(to top, #353739, #1a1c1f) !important; /* Added gradient */
+}

@@ -1,0 +1,141 @@
+{
+    "id": 15,
+    "name": "Recipe Test",
+    "description": null,
+    "category": "Food",
+    "subcategory": "Recipes",
+    "parent_node": null,
+    "payload": {
+        "network": {
+            "edges": [
+                {
+                    "id": "reactflow__edge-dndnode_0next-dndnode_1",
+                    "source": "dndnode_0",
+                    "target": "dndnode_1",
+                    "sourceHandle": "next",
+                    "targetHandle": null
+                },
+                {
+                    "id": "reactflow__edge-dndnode_1next-dndnode_2",
+                    "source": "dndnode_1",
+                    "target": "dndnode_2",
+                    "sourceHandle": "next",
+                    "targetHandle": null
+                },
+                {
+                    "id": "reactflow__edge-dndnode_2next-dndnode_3",
+                    "source": "dndnode_2",
+                    "target": "dndnode_3",
+                    "sourceHandle": "next",
+                    "targetHandle": null
+                }
+            ],
+            "nodes": [
+                {
+                    "id": "dndnode_0",
+                    "data": {
+                        "label": "start"
+                    },
+                    "type": "start",
+                    "width": 54,
+                    "height": 40,
+                    "dragging": false,
+                    "position": {
+                        "x": 196.89236111111114,
+                        "y": 70
+                    },
+                    "selected": false,
+                    "positionAbsolute": {
+                        "x": 196.89236111111114,
+                        "y": 70
+                    }
+                },
+                {
+                    "id": "dndnode_1",
+                    "data": {
+                        "label": "textInput"
+                    },
+                    "type": "textInput",
+                    "width": 86,
+                    "height": 40,
+                    "dragging": false,
+                    "position": {
+                        "x": 181.33680555555554,
+                        "y": 141.11111111111111
+                    },
+                    "selected": true,
+                    "positionAbsolute": {
+                        "x": 181.33680555555554,
+                        "y": 141.11111111111111
+                    }
+                },
+                {
+                    "id": "dndnode_2",
+                    "data": {
+                        "label": "prompt"
+                    },
+                    "type": "prompt",
+                    "width": 68,
+                    "height": 40,
+                    "dragging": false,
+                    "position": {
+                        "x": 194.67013888888889,
+                        "y": 213.33333333333331
+                    },
+                    "selected": false,
+                    "positionAbsolute": {
+                        "x": 194.67013888888889,
+                        "y": 213.33333333333331
+                    }
+                },
+                {
+                    "id": "dndnode_3",
+                    "data": {
+                        "label": "finish"
+                    },
+                    "type": "finish",
+                    "width": 60,
+                    "height": 40,
+                    "dragging": false,
+                    "position": {
+                        "x": 194.6701388888889,
+                        "y": 301.1111111111111
+                    },
+                    "selected": false,
+                    "positionAbsolute": {
+                        "x": 194.6701388888889,
+                        "y": 301.1111111111111
+                    }
+                }
+            ],
+            "viewport": {
+                "x": 0,
+                "y": 0,
+                "zoom": 0.9
+            }
+        },
+        "nodeData": {
+            "dndnode_0": {
+                "id": "dndnode_0",
+                "introText": "Hello, this is a recipe prompt flow."
+            },
+            "dndnode_1": {
+                "id": "dndnode_1",
+                "hint": "eg: French, Spanish, Chinese, Mexican, Japanese, Italian...",
+                "question": "What is your favorite kind of food?"
+            },
+            "dndnode_2": {
+                "id": "dndnode_2",
+                "prompt": "Create 10 recipes for {text} ",
+                "system": "You are chefGPT helpful cooking AI assistant"
+            },
+            "dndnode_3": {
+                "id": "dndnode_3",
+                "type": "finish",
+                "outroMessage": "Here's your recipes: {text}"
+            }
+        }
+    },
+    "created_on": "2023-07-08T00:14:28.044741+00:00",
+    "updated_on": "2023-07-08T03:53:27.060442+00:00"
+}
