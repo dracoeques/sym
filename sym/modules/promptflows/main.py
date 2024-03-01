@@ -376,17 +376,58 @@ def duplicate_prompt_flow(session, id_prompt_flow):
 
     
     #get all nodes and edges for this flow from the database
+    nodes = pf.nodes
+    edges = pf.edges
 
     #get existing nodes / edges
+    idstr2nodes = {}
 
     #create a new prompt flow object with the existing data 
     #CHANGE THE NAME
     new_pf = PromptFlow()
 
     #save the new prompt flow object
+    session.add(pf)
+    session.commit()
 
     #create new nodes and edges for the new prompt flow object
+    #add our nodes
+    for node_config in nodes:
+        id_str = node_config["id"]
+        node_type = node_config["type"]
+        node_payload = node_config["node_payload"]
 
+        node_record = build_node_record(
+            id_str=id_str,
+            node_type=node_type,
+            node_payload=node_payload,
+            id_prompt_flow=pf.id,
+        )
+        session.add(node_record)
+        idstr2nodes[id_str] = node_record
+    
+    session.commit()
 
+    #add our edges
+    for edge in edges:
+        #print(edge)
+        id_str = edge["id"]
+        source = edge["source"]
+        target = edge["target"]
+        source_handle = edge["sourceHandle"]
+        edge_payload = {
+            "source_handle":source_handle,
+        }
+        node_source = idstr2nodes[source].id
+        node_target = idstr2nodes[target].id
+        edge_record = build_edge_record(
+            id_str=id_str,
+            id_prompt_flow=pf.id,
+            start_node_id=node_source,
+            end_node_id=node_target,
+            edge_payload=edge_payload,
+        )
+        session.add(edge_record)
+    session.commit()
 
     return new_pf
